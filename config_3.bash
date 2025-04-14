@@ -5,14 +5,14 @@
 # It will also run "generate_configs.py" based on the given parameters
 
 ############### TODO CHANGE
-cloud_ip="172.29.197.29" #Change every time when new VPN is connected
+cloud_ip="172.29.197.54" #Change every time when new VPN is connected
 
-model_name="conv5small"
+model_name="conv5smallBN"
 loss_func_name="cross_entropy"
-loss_type="fedavg" # change to fedmax or fedprox
-mu=1.0 # For FedProx
+loss_type="fedprox" # change to fedmax or fedprox
+mu=0.2 # For FedProx
 beta=10.0 # For FedMAX
-learning_rate=0.02
+learning_rate=0.015
 
 declare -a experiment_configs=(
 # experiment | run | data_iid
@@ -20,8 +20,19 @@ declare -a experiment_configs=(
   # "2 1 false" # Experiment 2, Run 1, Non-IID
   # "3 1 false" # Experiment 3, Run 1, Non-IID  (LEARNING RATE FROM 0.01 TO 0.1)
   # "4 1 false" # Experiment 4, Run 1, Non-IID  (LOCAL EPOCHS FROM 1 TO 2)
-  "5 1 false" # Experiment 5, Run 1, Non-IID  (LEARNING RATE FROM 0.01 TO 0.02)
+  # "5 1 false" # Experiment 5, Run 1, Non-IID  (LEARNING RATE FROM 0.01 TO 0.02)
   # "6 1 false" # Experiment 6, Run 1, Non-IID  (ADD BATCH NORMALIZATION TO CONV5SMALL)
+  # "7 1 true" # Experiment 7, Run 1, IID  (Try FedMax)
+  # "8 1 false" # Experiment 8, Run 1, Non-IID  (Try FedMax)
+  # "9 1 true" # Experiment 9, Run 1, IID  (Try FedProx)
+  # "10 1 false" # Experiment 10, Run 1, Non-IID  (Try FedProx)
+  # "11 1 false" # Experiment 11, Run 1, Non-IID  (Try FedProx, mu=0.5)
+  # "12 1 false" # Experiment 12, Run 1, Non-IID  (FedAvg, BN, lr=0.015)
+  # "13 1 false" # Experiment 13, Run 1, Non-IID  (FedAvg, BN, lr=0.025)
+  # "14 1 false" # Experiment 14, Run 1, Non-IID  (FedAvg, BN, lr=0.02)
+  # "15 1 false" # Experiment 15, Run 1, Non-IID  (FedMax, BN, lr=0.015, Beta=100)
+  # "16 1 false" # Experiment 16, Run 1, Non-IID  (FedMax, BN, lr=0.015, Beta=10)
+  "17 1 false" # Experiment 17, Run 1, Non-IID  (FedProx, BN, lr=0.015, mu=.2)
 )
 
 declare -a devices_configs=(
