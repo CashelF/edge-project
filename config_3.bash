@@ -5,13 +5,13 @@
 # It will also run "generate_configs.py" based on the given parameters
 
 ############### TODO CHANGE
-cloud_ip="172.29.197.54" #Change every time when new VPN is connected
+cloud_ip="172.29.197.214" #Change every time when new VPN is connected
 
-model_name="conv5smallBN"
+model_name="conv3smallBN"
 loss_func_name="cross_entropy"
-loss_type="fedprox" # change to fedmax or fedprox
+loss_type="fedavg" # change to fedmax or fedprox
 mu=0.2 # For FedProx
-beta=10.0 # For FedMAX
+beta=100.0 # For FedMAX
 learning_rate=0.015
 
 declare -a experiment_configs=(
@@ -32,13 +32,23 @@ declare -a experiment_configs=(
   # "14 1 false" # Experiment 14, Run 1, Non-IID  (FedAvg, BN, lr=0.02)
   # "15 1 false" # Experiment 15, Run 1, Non-IID  (FedMax, BN, lr=0.015, Beta=100)
   # "16 1 false" # Experiment 16, Run 1, Non-IID  (FedMax, BN, lr=0.015, Beta=10)
-  "17 1 false" # Experiment 17, Run 1, Non-IID  (FedProx, BN, lr=0.015, mu=.2)
+  # "17 1 false" # Experiment 17, Run 1, Non-IID  (FedProx, BN, lr=0.015, mu=.2)
+  # "18 1 false" # Experiment 18, Run 1, Non-IID  (FedAvg, BN, lr=0.015, mu=.5, Conv3smallBN)
+  # "19 1 false" # Experiment 19, Run 1, Non-IID  (FedAvg, BN, lr=0.015, mu=.5, Conv1smallBN)
+  # "20 1 false" # Experiment 20, Run 1, Non-IID  (FedAvg, BN, lr=0.015, mu=.5, Conv1smallBN, mc1-2local rpi-1local)
+  # "21 1 false" # Experiment 21, Run 1, Non-IID  (FedAvg, BN, lr=0.015, Conv3smallBN, mc1-2local rpi-1local)
+  # "21 2 false" # Experiment 21, Run 2, Non-IID  (FedAvg, BN, lr=0.015, Conv3smallBN, mc1-2local rpi-1local)
+  "21 3 false" # Experiment 21, Run 3, Non-IID  (FedAvg, BN, lr=0.015, Conv3smallBN, mc1-2local rpi-1local)
+  # "22 1 false" # Experiment 22, Run 1, Non-IID  (FedAvg, BN, lr=0.015, Conv3smallBN, mc1-2local rpi-1local, not divide by 255)
+  # "23 1 false" # Experiment 23, Run 1, Non-IID  (FedAvg, BN, lr=0.015, Conv2smallBN, mc1-2local rpi-1local)
+  # "24 1 false" # Experiment 24, Run 1, Non-IID  (FedAvg, BN, lr=0.015, Conv3smallBN, depth-wise, mc1-2local rpi-1local)
+  # "25 1 false" # Experiment 24, Run 1, Non-IID  (FedAvg, BN, lr=0.015, Conv3smallBN, depth-wise take 2, mc1-2local rpi-1local)
 )
 
 declare -a devices_configs=(
 # hw_type | host | port | cuda_name | local_epochs
   "rpi sld-rpi-15.ece.utexas.edu 9090 cpu 1" #Change number of device
-  "mc1 sld-mc1-15.ece.utexas.edu 9090 cpu 1" #Change number of device
+  "mc1 sld-mc1-15.ece.utexas.edu 9090 cpu 2" #Change number of device
 )
 ############### TODO END CHANGE
 
