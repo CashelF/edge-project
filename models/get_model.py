@@ -6,7 +6,7 @@ from models.conv5 import (
     Conv5_small,
     Conv5_small_BN,
 )
-from models.dws_conv5 import Conv3_small_BN_DWS, Conv5_small_BN_DWS
+from models.dws_conv5 import Conv3_small_DWS, Conv5_small_DWS
 
 
 def get_model(model_name, loss_type="fedavg"):
@@ -23,8 +23,8 @@ def get_model(model_name, loss_type="fedavg"):
     elif model_name == "conv1smallBN":
         return Conv1_small_BN(loss_type=loss_type)
     elif model_name == "conv5smallBN_DWS":
-        return Conv5_small_BN_DWS(loss_type=loss_type)
+        return Conv5_small_DWS(loss_type=loss_type)
     elif model_name == "conv3smallBN_DWS":
-        return Conv3_small_BN_DWS(loss_type=loss_type)
+        return Conv3_small_DWS(loss_type=loss_type)
     else:
         raise NotImplementedError(f"[!] ERROR: Model {model_name} not implemented yet")
